@@ -73,7 +73,6 @@ class Graph:
 
             current_node_neighbors = list()
             for i in range(len(self.graph_arcs[current_node_idx])):
-                archi = self.graph_arcs[current_node_idx]
                 if self.graph_arcs[current_node_idx][i] != 0:
                     current_node_neighbors.append(self.graph_nodes[i])
 
@@ -136,7 +135,6 @@ class Graph:
 
             current_node_neighbors = list()
             for i in range(len(self.graph_arcs[current_node_idx])):
-                archi = self.graph_arcs[current_node_idx]
                 if self.graph_arcs[current_node_idx][i] != 0:
                     current_node_neighbors.append(self.graph_nodes[i])
 
@@ -156,3 +154,16 @@ class Graph:
 
             iteration += 1
             print()
+
+
+# *** **** ***
+# *** MAIN ***
+# *** **** ***
+
+# Insert your Graph below
+# graph_infos = dict()
+# graph_infos[''] = [('',)]
+# graph = Graph(graph_infos)
+
+# graph.breadth_search()
+# graph.depth_search()
