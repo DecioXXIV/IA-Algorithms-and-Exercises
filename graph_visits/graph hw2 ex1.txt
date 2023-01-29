@@ -1,0 +1,7 @@
+graph_infos = dict()
+graph_infos['S0'] = [('S1',2),('S2',10)]
+graph_infos['S1'] = [('S3',4),('S0',5)]
+graph_infos['S2'] = [('S4',5)]
+graph_infos['S3'] = [('S2',2),('S4',5),('S5',5)]
+graph_infos['S4'] = [('S5',3),('S3',2)]
+graph_infos['S5'] = [('S1',10)]
