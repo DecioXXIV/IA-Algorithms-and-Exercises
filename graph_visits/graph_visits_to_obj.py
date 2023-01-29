@@ -245,26 +245,3 @@ class Graph:
 
 # graph.breadth_search_to_obj()
 # graph.depth_search_to_obj()
-
-graph_infos = dict()
-graph_infos['AQ'] = [('RM',11),('AN',19),('PG',17)]
-graph_infos['AN'] = [('BO',21),('AQ',19),('BA',46),('PG',16)]
-graph_infos['BA'] = [('RM',46),('AN',45)]
-graph_infos['BO'] = [('AN',21),('MI',21),('FI',10)]
-graph_infos['FI'] = [('BO',10),('RM',28),('PG',15),('PI',9),('GE',22)]
-graph_infos['GE'] = [('FI',22),('PI',16),('MI',14)]
-graph_infos['MI'] = [('TO',14),('GE',14),('BO',21)]
-graph_infos['NA'] = [('RM',22)]
-graph_infos['PG'] = [('RM',17),('FI',15),('AN',16),('AQ',17)]
-graph_infos['PI'] = [('FI',9),('GE',16),('RM',37)]
-graph_infos['RM'] = [('NA',22),('AQ',11),('BA',45),('PI',17),('PG',37),('FI',28)]
-graph_infos['TO'] = [('MI',14)]
-
-objectives = [0,0,1,0,0,0,0,0,0,0,0,0]
-
-graph = Graph(graph_infos,objectives)
-
-graph.depth_search_to_obj()
-
-
-
