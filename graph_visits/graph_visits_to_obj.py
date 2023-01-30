@@ -1,6 +1,6 @@
 import numpy as np
 
-class GraphSearchNode:
+class Node:
     pass
     def __init__(self, state, parent, cost_from_parent):
         self.state = state
@@ -15,7 +15,7 @@ class Graph:
 
         self.graph_arcs = np.zeros((rows,columns), dtype=np.int)
 
-        arcs_list = []
+        arcs_list = list()
         for node in self.graph_nodes:
             for neighbor in graph[node]:
                 arcs_list.append((node,neighbor))
@@ -60,8 +60,6 @@ class Graph:
         closed_list = list()
         fringe = list()
 
-        graph_search_nodes = list()
-
         solution_node = None
 
 # STEP 1: We decide to expand the first Node in the Fringe, which gets removed from it and gets appended to the Closed List.
@@ -69,24 +67,24 @@ class Graph:
         iteration = 1
         while iterate == True:
             if iteration == 1:
-                current_search_node = GraphSearchNode(state=starting_node, parent=None, cost_from_parent=0)
-                graph_search_nodes.append(current_search_node)
+                current_node = Node(state=starting_node, parent=None, cost_from_parent=0)
             else:
                 current_node = fringe.pop(0)
-                current_search_node = None
-                for search_node in graph_search_nodes:
-                    if search_node.state == current_node:
-                        current_search_node = search_node
-                        break
             
             print("ITERATION: %d" % iteration)
-            print("Expanded Node: %s" % current_search_node.state)
+            print("Expanded Node: %s" % current_node.state)
 
-            if current_search_node.state not in closed_list:
-                closed_list.append(current_search_node.state)
+            if current_node.state not in closed_list:
+                closed_list.append(current_node.state)
 
-# STEP 2: For the "current_node" we retrieve all the Neighbors.
-            current_node_idx = self.graph_nodes.index(current_search_node.state)
+# STEP 2: For the "current_node" we execute the Goal Test: if it succeeds we have found the Solution and the Algorithm ends, otherwise we retrieve all the Neighbors.
+            current_node_idx = self.graph_nodes.index(current_node.state)
+
+            if self.objectives[current_node_idx] == 1:
+                iterate = False
+                solution_node = current_node
+                print("*** SOLUTION FOUND! END OF THE SEARCH ***\n")
+                break
 
             current_node_neighbors = list()
             for i in range(len(self.graph_arcs[current_node_idx])):
@@ -98,24 +96,21 @@ class Graph:
             current_node_neighbors.sort()
             for neighbor in current_node_neighbors:
                 if neighbor not in closed_list:
-                    fringe.append(neighbor)
-
                     neighbor_idx = self.graph_nodes.index(neighbor)
                     cost_from_parent = self.graph_arcs[current_node_idx][neighbor_idx]
-                    graph_search_nodes.append(GraphSearchNode(neighbor, current_search_node, cost_from_parent))
-            
-# The Algorithm ends when it founds the Solution or when the Fringe is empty.
-            print("Fringe: " + str(fringe))
 
-            if self.objectives[current_node_idx] == 1:
-                iterate = False
-                solution_node = current_search_node
-                print("\n*** SOLUTION FOUND! END OF THE SEARCH ***")
-                break
+                    new_neighbor = Node(state=self.graph_nodes[neighbor_idx], parent=current_node, cost_from_parent=cost_from_parent)
+                    fringe.append(new_neighbor)
+            
+# The Algorithm ends when it founds the Solution or if the Fringe is empty.
+            print("Fringe: [ ", end="")
+            for node in fringe:
+                print(node.state + " ", end="")
+            print("]")
             
             if len(fringe) == 0:
                 iterate = False
-                print("\n*** EMPTY FRINGE! END OF THE SEARCH ***")
+                print("*** EMPTY FRINGE! END OF THE SEARCH ***\n")
                 break
 
             iteration += 1
@@ -156,8 +151,6 @@ class Graph:
         closed_list = list()
         fringe = list()
 
-        graph_search_nodes = list()
-
         solution_node = None
 
 # STEP 1: We decide to expand the first Node in the Fringe, which gets removed from it and gets appended to the Closed List.
@@ -165,24 +158,24 @@ class Graph:
         iteration = 1
         while iterate == True:
             if iteration == 1:
-                current_search_node = GraphSearchNode(state=starting_node, parent=None, cost_from_parent=0)
-                graph_search_nodes.append(current_search_node)
+                current_node = Node(state=starting_node, parent=None, cost_from_parent=0)
             else:
                 current_node = fringe.pop(0)
-                current_search_node = None
-                for search_node in graph_search_nodes:
-                    if search_node.state == current_node and search_node:
-                        current_search_node = search_node
-                        break
             
             print("ITERATION: %d" % iteration)
-            print("Expanded Node: %s" % current_search_node.state)
+            print("Expanded Node: %s" % current_node.state)
 
-            if current_search_node.state not in closed_list:
-                closed_list.append(current_search_node.state)
+            if current_node.state not in closed_list:
+                closed_list.append(current_node.state)
 
-# STEP 2: For the "current_node" we retrieve all the Neighbors.
-            current_node_idx = self.graph_nodes.index(current_search_node.state)
+# STEP 2: For the "current_node" we execute the Goal Test: if it succeeds we have found the Solution and the Algorithm ends, otherwise we retrieve all the Neighbors.
+            current_node_idx = self.graph_nodes.index(current_node.state)
+
+            if self.objectives[current_node_idx] == 1:
+                iterate = False
+                solution_node = current_node
+                print("*** SOLUTION FOUND! END OF THE SEARCH ***\n")
+                break
 
             current_node_neighbors = list()
             for i in range(len(self.graph_arcs[current_node_idx])):
@@ -194,24 +187,21 @@ class Graph:
             current_node_neighbors.sort(reverse=True)
             for neighbor in current_node_neighbors:
                 if neighbor not in closed_list:
-                    fringe.insert(0,neighbor)
-
                     neighbor_idx = self.graph_nodes.index(neighbor)
                     cost_from_parent = self.graph_arcs[current_node_idx][neighbor_idx]
-                    graph_search_nodes.insert(0,GraphSearchNode(neighbor, current_search_node, cost_from_parent))
-            
-# The Algorithm ends when the Fringe is empty.
-            print("Fringe: " + str(fringe))
 
-            if self.objectives[current_node_idx] == 1:
-                iterate = False
-                solution_node = current_search_node
-                print("\n*** SOLUTION FOUND! END OF THE SEARCH ***")
-                break
+                    new_neighbor = Node(state=neighbor, parent=current_node, cost_from_parent=cost_from_parent)
+                    fringe.insert(0,new_neighbor)
+            
+# The Algorithm ends when it founds the Solution or if the Fringe is empty.
+            print("Fringe: [ ", end="")
+            for node in fringe:
+                print(node.state + " ", end="")
+            print("]")
             
             if len(fringe) == 0:
                 iterate = False
-                print("\n*** EMPTY FRINGE! END OF THE SEARCH ***")
+                print("*** EMPTY FRINGE! END OF THE SEARCH ***\n")
                 break
 
             iteration += 1
