@@ -1,0 +1,23 @@
+graph_infos = dict()
+graph_infos['Bus Stop'] = [('Library',2)]
+graph_infos['Library'] = [('Bus Stop',2),('Student Center',2),('Cark Park',5)]
+graph_infos['Student Center'] = [('Library',2),('Theater',1),('Store',4)]
+graph_infos['Theater'] = [('Student Center',1),('Sports Center',2.5)]
+graph_infos['Sports Center'] = [('Theater',2.5),('Store',1)]
+graph_infos['Store'] = [('Student Center',4),('Sports Center',1),('Car Park',5),('Canteen',3)]
+graph_infos['Car Park'] = [('Library',5),('Store',5),('Maths Building',4)]
+graph_infos['Maths Building'] = [('Car Park',4),('Canteen',2)]
+graph_infos['Canteen'] = [('AI Lab',1),('Maths Building',2),('Store',3)]
+graph_infos['AI Lab'] = [('Canteen',1)]
+
+h = dict() # Distanza in linea d'aria da "AI Lab" (Obbiettivo)
+graph_infos['Bus Stop'] = 8.9
+graph_infos['Library'] = 8.2
+graph_infos['Student Center'] = 8.0
+graph_infos['Theater'] = 7.1
+graph_infos['Sports Center'] = 5.1
+graph_infos['Store'] = 4.0
+graph_infos['Car Park'] = 6.4
+graph_infos['Maths Building'] = 2.2
+graph_infos['Canteen'] = 1.0
+graph_infos['AI Lab'] = 0.0
