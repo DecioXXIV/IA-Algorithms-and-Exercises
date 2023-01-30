@@ -11,3 +11,5 @@ graph_infos['PG'] = [('RM',17),('FI',15),('AN',16),('AQ',17)]
 graph_infos['PI'] = [('FI',9),('GE',16),('RM',37)]
 graph_infos['RM'] = [('NA',22),('AQ',11),('BA',45),('PI',17),('PG',37),('FI',28)]
 graph_infos['TO'] = [('MI',14)]
+
+objectives = [0,0,0,0,0,0,0,1,0,0,0,0] # NA is the default Objective Node

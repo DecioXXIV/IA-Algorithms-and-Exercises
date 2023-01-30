@@ -5,3 +5,5 @@ graph_infos['S2'] = [('S4',5)]
 graph_infos['S3'] = [('S2',2),('S4',5),('S5',5)]
 graph_infos['S4'] = [('S5',3),('S3',2)]
 graph_infos['S5'] = [('S1',10)]
+
+objectives = [0,0,0,0,0,1] # S5 is the default Objective Node
