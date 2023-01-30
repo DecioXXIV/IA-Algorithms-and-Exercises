@@ -183,7 +183,9 @@ class Graph:
                     current_node.children.append(new_neighbor)
 
 # STEP 3: The Neighbors of the "current_node" are added to the Fringe.
-# Insight: As said before, the Fringe is ordered with the "Increasing H Value" rule. The first Nodes are estimated to be closer to the Objective.
+# Insight: as said before...
+#   - The Fringe is ordered with the "Increasing H Value" rule. The first Nodes are estimated to be closer to the Objective.
+#   - The Fringe contains only the Nodes whose stats are "not-yet-visited".
             for node in current_node.children:
                 if node.state not in closed_list:
                     if len(fringe) == 0:
@@ -231,54 +233,12 @@ class Graph:
 
 # Insert your Graph and Heuristic information below
 
-graph_infos = dict()
-graph_infos['Arad'] = [('Sibiu',140),('Timisoara',118),('Zerind',75)]
-graph_infos['Bucharest'] = [('Fagaras',211),('Giurgiu',90),('Pitesti',101),('Urziceni',85)]
-graph_infos['Craiova'] = [('Drobeta',120),('Pitesti',120),('Rimnicu',146)]
-graph_infos['Drobeta'] = [('Craiova',120),('Mehadia',75)]
-graph_infos['Eforie'] = [('Hirsova',86)]
-graph_infos['Fagaras'] = [('Sibiu',99),('Bucharest',211)]
-graph_infos['Giurgiu'] = [('Bucharest',90)]
-graph_infos['Hirsova'] = [('Eforie',86),('Urziceni',98)]
-graph_infos['Iasi'] = [('Neamt',87),('Vaslui',92)]
-graph_infos['Lugoj'] = [('Mehadia',70),('Timisoara',111)]
-graph_infos['Mehadia'] = [('Drobeta',75),('Lugoj',70)]
-graph_infos['Neamt'] = [('Iasi',87)]
-graph_infos['Oradea'] = [('Sibiu',151),('Zerind',71)]
-graph_infos['Pitesti'] = [('Bucharest',101),('Craiova',120),('Rimnicu',97)]
-graph_infos['Rimnicu'] = [('Craiova',146),('Pitesti',97),('Sibiu',80)]
-graph_infos['Sibiu'] = [('Arad',140),('Fagaras',99),('Oradea',151),('Rimnicu',80)]
-graph_infos['Timisoara'] = [('Arad',118),('Lugoj',111)]
-graph_infos['Urziceni'] = [('Bucharest',85),('Hirsova',98),('Vaslui',142)]
-graph_infos['Vaslui'] = [('Iasi',92),('Urziceni',142)]
-graph_infos['Zerind'] = [('Arad',75),('Oradea',71)]
+# graph_infos = dict()
+# graph_infos[''] = [('',)]
 
-h = dict() # Distanza in Linea d'Aria da Bucharest (Obbiettivo)
-h['Arad'] = 366
-h['Bucharest'] = 0
-h['Craiova'] = 160
-h['Drobeta'] = 242
-h['Eforie'] = 161
-h['Fagaras'] = 176
-h['Giurgiu'] = 77
-h['Hirsova'] = 151
-h['Iasi'] = 226
-h['Lugoj'] = 244
-h['Mehadia'] = 241
-h['Neamt'] = 234
-h['Oradea'] = 380
-h['Pitesti'] = 100
-h['Rimnicu'] = 193
-h['Sibiu'] = 253
-h['Timisoara'] = 329
-h['Urziceni'] = 80
-h['Vaslui'] = 199
-h['Zerind'] = 374
+# h = dict()
+# h[''] = ...
 
-graph = Graph(graph_infos,h)
-graph.greedy_search_tree_mode()
-
-
-
-
-        
+# graph = Graph(graph_infos,h)
+# graph.greedy_search_tree_mode()
+# graph.greedy_search_graph_mode()
