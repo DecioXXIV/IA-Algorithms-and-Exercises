@@ -36,6 +36,9 @@ class Graph:
 # *** ************** ***
 
     def breadth_search(self):
+        print("**********************************")
+        print("*** BREADTH SEARCH, GRAPH MODE ***")
+        print("**********************************\n")
         starting_node = None
 
 # The Search begins from a Starting Node, which must be in the Graph.
@@ -48,7 +51,7 @@ class Graph:
                 print("This Node is not in the Graph!\n")
 
 # ALGORITHM'S EXPLANATION: this version exploits the "Graph Search" model, in which the Fringe contains only the "not-yet-expanded" Nodes.        
-        print("\n*** STARTING: BREADTH FIRST SEARCH ***")
+        print("\n*** STARTING THE SEARCH... ***")
         closed_list = list()
         fringe = list()
 
@@ -98,6 +101,9 @@ class Graph:
 # *** ************ ***
 
     def depth_search(self):
+        print("********************************")
+        print("*** DEPTH SEARCH, GRAPH MODE ***")
+        print("********************************\n")
         starting_node = None
 
 # The Search begins from a Starting Node, which must be in the Graph.
@@ -110,7 +116,7 @@ class Graph:
                 print("This Node is not in the Graph!\n")
 
 # ALGORITHM'S EXPLANATION: this version exploits the "Graph Search" model, in which the Fringe contains only the "not-yet-expanded" Nodes.   
-        print("\n*** STARTING: DEPTH FIRST SEARCH ***")
+        print("\n*** STARTING THE SEARCH... ***")
         closed_list = list()
         fringe = list()
 
@@ -161,6 +167,7 @@ class Graph:
 # *** **** ***
 
 # Insert your Graph below
+
 # graph_infos = dict()
 # graph_infos[''] = [('',)]
 # graph = Graph(graph_infos)
