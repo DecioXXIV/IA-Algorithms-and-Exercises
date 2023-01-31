@@ -76,7 +76,7 @@ class Graph:
 # STEP 2: For the "current_node" we execute the Goal Test: if it succeeds we have found the Solution and the Algorithm ends, otherwise we retrieve all the Neighbors.            
             current_node_idx = self.graph_nodes.index(current_node.state)
             
-            if current_node.h == int(0):
+            if int(current_node.h) == 0:
                 iterate = False
                 solution_node = current_node
                 print("*** SOLUTION FOUND! END OF THE SEARCH ***\n")
@@ -169,7 +169,7 @@ class Graph:
 # STEP 2: For the "current_node" we execute the Goal Test: if it succeeds we have found the Solution and the Algorithm ends, otherwise we retrieve all the Neighbors.            
             current_node_idx = self.graph_nodes.index(current_node.state)
             
-            if current_node.h == int(0):
+            if int(current_node.h) == 0:
                 iterate = False
                 solution_node = current_node
                 print("*** SOLUTION FOUND! END OF THE SEARCH ***\n")
