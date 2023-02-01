@@ -6,6 +6,19 @@ class Node:
         self.state = state
         self.parent = parent
         self.cost_from_parent = cost_from_parent
+    
+    def solution_dump(self, iteration):
+        solution_path = list()
+        total_cost = 0
+        while self is not None:
+            solution_path.append(self.state)
+            total_cost += self.cost_from_parent
+            self = self.parent
+        solution_path.reverse()
+        print("*** FINAL ITERATION: %d" % iteration) 
+        print("*** SOLUTION = " + str(solution_path))
+        print("*** TOTAL COST: %d\n" % total_cost)
+
 
 class Graph:
     def __init__(self, graph, objectives):
@@ -120,18 +133,9 @@ class Graph:
             print()
 
         if solution_node is not None:
-            solution_path = list()
-            total_cost = 0
-            while solution_node is not None:
-                solution_path.append(solution_node.state)
-                total_cost += solution_node.cost_from_parent
-                solution_node = solution_node.parent
-            solution_path.reverse()
-            print("*** FINAL ITERATION: %d" % iteration) 
-            print("*** SOLUTION = " + str(solution_path))
-            print("*** TOTAL COST: %d" % total_cost)
+            solution_node.solution_dump(iteration)
         else:
-            print("*** THERE IS NOT AN OBJECTIVE NODE IN THE GRAPH! ***")
+            print("*** THERE IS NOT AN OBJECTIVE NODE IN THE GRAPH! ***\n")
      
 # *** ************ ***
 # *** DEPTH SEARCH ***
@@ -214,18 +218,9 @@ class Graph:
             print()
 
         if solution_node is not None:
-            solution_path = list()
-            total_cost = 0
-            while solution_node is not None:
-                solution_path.append(solution_node.state)
-                total_cost += solution_node.cost_from_parent
-                solution_node = solution_node.parent
-            solution_path.reverse()
-            print("*** FINAL ITERATION: %d" % iteration) 
-            print("*** SOLUTION = " + str(solution_path))
-            print("*** TOTAL COST: %d" % total_cost)
+            solution_node.solution_dump(iteration)
         else:
-            print("*** THERE IS NOT AN OBJECTIVE NODE IN THE GRAPH! ***")
+            print("*** THERE IS NOT AN OBJECTIVE NODE IN THE GRAPH! ***\n")
 
 
 # *** **** ***

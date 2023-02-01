@@ -1,6 +1,6 @@
 graph_infos = dict()
 graph_infos['Bus Stop'] = [('Library',2)]
-graph_infos['Library'] = [('Bus Stop',2),('Student Center',2),('Cark Park',5)]
+graph_infos['Library'] = [('Bus Stop',2),('Student Center',2),('Car Park',5)]
 graph_infos['Student Center'] = [('Library',2),('Theater',1.41),('Store',4)]
 graph_infos['Theater'] = [('Student Center',1.41),('Sports Center',2)]
 graph_infos['Sports Center'] = [('Theater',2),('Store',1.41)]
