@@ -40,11 +40,11 @@ def first_choice_hill_climbing(starting_string, target_string):
     current_eval = eval_function(current_state, target_string)
     iteration = 1
 
-    while True:
-        print("ITERATION: %d" % iteration)
-        print("Current Score: %d" % current_eval)
-        print("Current String:", "".join(current_state), "\n")
+    print("Starting Score: %d" % current_eval)
+    print("Starting String:", "".join(current_state), "\n")
 
+    while True:
+    
         if current_eval == 0:
             break
 
@@ -55,7 +55,12 @@ def first_choice_hill_climbing(starting_string, target_string):
         if next_state_eval < current_eval:
             current_state = next_state
             current_eval = next_state_eval
-        
+
+# VISUALIZATION EFFICIENCY: "current_eval" and "current_state" are printed only if the Algorithm actually moves to a next state which is better than the actual state.
+            print("Improvement found at Iteration %d!" % iteration)
+            print("Current Score: %d" % current_eval)
+            print("Current String:", "".join(current_state), "\n")
+
         iteration += 1
     
     print("*** END OF THE SEARCH ***")
