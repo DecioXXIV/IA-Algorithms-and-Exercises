@@ -12,10 +12,9 @@ class Node:
     
     def solution_dump(self, iteration):
         solution_path = list()
-        total_cost = 0
+        total_cost = self.cost_so_far
         while self is not None:
             solution_path.append(self.state)
-            total_cost += self.cost_from_parent
             self = self.parent
 
         solution_path.reverse()
