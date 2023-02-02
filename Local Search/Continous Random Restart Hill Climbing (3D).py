@@ -63,6 +63,7 @@ def random_restart_hill_climbing_with_scores(ackley_function, bounds, n_base_ite
             best_eval = current_eval
             scores.append(best_eval)
         
+    print("*** END OF THE SEARCH! ***")
     return scores
 
 # *** **** ***
