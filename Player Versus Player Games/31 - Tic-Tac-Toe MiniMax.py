@@ -92,7 +92,7 @@ class Game:
         return "Tie"
 
 
-# FUNCTION: evaluates all the possible moves for the Player and suggests the best one
+# FUNCTION: evaluates all the possible moves for the Player and suggests the best one.
     def min(self):
         minv = np.inf
         # Possible values for "minv"
@@ -129,7 +129,7 @@ class Game:
         return (minv, qx, qy)
 
 
-# FUNCTION: evaluates all the possible moves for the Player and returns the best one
+# FUNCTION: evaluates all the possible moves for the AI and returns the best one.
     def max(self):
         maxv = -np.inf
         # Possible values for "max"
@@ -190,26 +190,28 @@ class Game:
                 # Player's Turn!
                 if self.player_turn == 'X':
                     while True:
-                        start = time.time()
+                        #start = time.time()
                         (m, qx, qy) = self.min()
-                        end = time.time()
+                        #end = time.time()
 
-                        print('Evaluation time: {}s'.format(round(end - start, 7)))
+                        #print('Evaluation time: {}s'.format(round(end - start, 7)))
+                        print("Player's Turn: choose your move!")
                         print('Recommended Move: X = {}, Y = {}'.format(qx, qy))
 
-                        print("CHOOSE YOUR MOVE!")
                         px = int(input('Row Index (0, 1 or 2): '))
                         py = int(input('Column Index (0, 1 or 2): '))
 
                         if self.is_valid(px, py):
                             self.current_state[px][py] = 'X'
                             self.player_turn = 'O'
+                            print()
                             break
                         else:
-                            print('The move you chose is not valid. Try again')
+                            print('The move you chose is not valid. Try again\n')
                 
                 # AI's Turn!
                 else:
+                    print("AI's Turn...\n")
                     (m, px, py) = self.max()
                     self.current_state[px][py] = 'O'
                     self.player_turn = 'X'
@@ -221,5 +223,3 @@ class Game:
 
 g = Game()
 g.minimax_play()
-
-
