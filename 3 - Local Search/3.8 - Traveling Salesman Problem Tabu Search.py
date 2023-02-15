@@ -54,7 +54,7 @@ def generate_neighbors(current, graph_arcs):
 
     for i in range(0, N-1):
         for j in range(i+1, N):
-            neighbor = np.copy(current)
+            neighbor = np.copy(current).tolist()
 
             temp = neighbor[i]
             neighbor[i] = neighbor[j]
@@ -108,43 +108,44 @@ def tabu_search(graph_nodes, graph_arcs, TABU_TENURE):
 
 # Tabu Search Cycle
     tabu_list = dict()
-    neighbors_list = list()
     iteration = 1
 
     while iteration-1 < MAX_ITERATIONS:
-        print("ITERATION = %d" % iteration)
         
-        current_best_cities = list()
-        for index in best:
-            current_best_cities.append(graph_nodes[index])
-
         if iteration == 1:
+            print("ITERATION = %d" % iteration)
+            
+            current_best_cities = list()
+            for index in best:
+                current_best_cities.append(graph_nodes[index])
+
             print("Starting State = %s" % str(current_best_cities))
-            print("Starting Cost = %d" % best_eval)
-        else:
-            print("Actual State = %s" % str(current_best_cities))
-            print("Actual Cost = %d" % best_eval)
-        print()
+            print("Starting Cost = %d\n" % best_eval)
 
         neighbors_full_list = generate_neighbors(current, graph_arcs)
+        neighbors_list = list()
 
         for neighbor in neighbors_full_list:
             is_tabu = tabu_test(neighbor, tabu_list)
             if is_tabu == False:
                 neighbors_list.append(neighbor)
         
-        next = neighbors_list[0][0]
-        next_eval = eval_function(next, graph_arcs)
+        current = neighbors_list[0][0]
+        current_eval = eval_function(current, graph_arcs)
 
-        if next_eval < current_eval:
-            current = next
-            current_eval = next_eval
+        if current_eval < best_eval:
+            best = current
+            best_eval = current_eval
 
-            if next_eval < best_eval:
-                best = next
-                best_eval = next_eval
+            current_best_cities = list()
+            for index in best:
+                current_best_cities.append(graph_nodes[index])
+
+            print("New Best Found at Iteration %d" % iteration)
+            print("New Best = %s" % str(current_best_cities))
+            print("Cost = %d\n" % best_eval)
         
-        for move in tabu_list:
+        for move in list(tabu_list):
             tabu_list[move] -= 1
             if tabu_list[move] == 0:
                 tabu_list.pop(move)
@@ -158,7 +159,7 @@ def tabu_search(graph_nodes, graph_arcs, TABU_TENURE):
     for index in best:
         final_cities.append(graph_nodes[index])
     
-    print("*** SEARCH IS OVER! ***")
+    print("*** ITERATION %d: SEARCH IS OVER! ***" % iteration)
     print("Final State = %s" % str(final_cities))
     print("Final Cost = %d\n" % best_eval)
 
@@ -189,19 +190,16 @@ def tabu_search_aspiration_criterion(graph_nodes, graph_arcs, TABU_TENURE):
     iteration = 1
 
     while iteration-1 < MAX_ITERATIONS:
-        print("ITERATION = %d" % iteration)
         
-        current_best_cities = list()
-        for index in best:
-            current_best_cities.append(graph_nodes[index])
-
         if iteration == 1:
+            print("ITERATION = %d" % iteration)
+        
+            current_best_cities = list()
+            for index in best:
+                current_best_cities.append(graph_nodes[index])
+
             print("Starting State = %s" % str(current_best_cities))
             print("Starting Cost = %d" % best_eval)
-        else:
-            print("Actual State = %s" % str(current_best_cities))
-            print("Actual Cost = %d" % best_eval)
-        print()
 
         neighbors_full_list = generate_neighbors(current, graph_arcs)
 
@@ -214,6 +212,14 @@ def tabu_search_aspiration_criterion(graph_nodes, graph_arcs, TABU_TENURE):
 
             current = next
             current_eval = next_eval
+
+            current_best_cities = list()
+            for index in best:
+                current_best_cities.append(graph_nodes[index])
+
+            print("New Best Found at Iteration %d" % iteration)
+            print("New Best = %s" % str(current_best_cities))
+            print("Cost = %d\n" % best_eval)
 
         for move in tabu_list.copy():
             tabu_list[move] -= 1
@@ -229,7 +235,7 @@ def tabu_search_aspiration_criterion(graph_nodes, graph_arcs, TABU_TENURE):
     for index in best:
         final_cities.append(graph_nodes[index])
     
-    print("*** SEARCH IS OVER! ***")
+    print("*** ITERATION %d: SEARCH IS OVER! ***" % iteration)
     print("Final State = %s" % str(final_cities))
     print("Final Cost = %d\n" % best_eval)
         
@@ -255,5 +261,4 @@ graph_infos['Palermo'] = [('Milano',887),('Torino',906),('Genova',791),('Bologna
 graph_nodes, graph_arcs = build_graph(graph_infos)
 
 tabu_search(graph_nodes, graph_arcs, TABU_TENURE)
-
 tabu_search_aspiration_criterion(graph_nodes, graph_arcs, TABU_TENURE)
