@@ -242,5 +242,5 @@ class Graph:
 # h[''] = ...
 
 # graph = Graph(graph_infos,h)
-# graph.greedy_search_tree_mode()
-# graph.greedy_search_graph_mode()
+# graph.a_star_tree_mode()
+# graph.a_star_graph_mode()
