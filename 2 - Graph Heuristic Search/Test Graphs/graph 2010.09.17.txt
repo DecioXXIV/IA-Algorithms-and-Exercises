@@ -1,0 +1,19 @@
+graph_infos = dict()
+graph_infos['S'] = [('A',3),('B',7)]
+graph_infos['A'] = [('C',1),('D',6)]
+graph_infos['B'] = [('E',4),('G2',9)]
+graph_infos['C'] = [('D',4),('S',2)]
+graph_infos['D'] = [('B',3),('G1',6)]
+graph_infos['E'] = [('G2',5)]
+graph_infos['G1'] = [('C',2)]
+graph_infos['G2'] = [('B',8)]
+
+h = dict()
+h['S'] = 10
+h['A'] = 5
+h['B'] = 5
+h['C'] = 1
+h['D'] = 2
+h['E'] = 4
+h['G1'] = 0
+h['G2'] = 0
