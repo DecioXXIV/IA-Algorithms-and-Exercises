@@ -56,23 +56,6 @@ class Ant:
         
         return next
     
-    # METHOD: it spreads the pheromone. 
-    def spread_pheromone(self, pheromone, all_paths):
-        n_cities = len(all_paths[0])
-        for path in all_paths:
-            for i in range(0, n_cities-1):
-                src = path[i]
-                dst = path[i+1]
-
-                # If the Ant chose a good arc (short), the spreaded pheromone will be higher.
-                # In this way it suggests to the "future Ants" a good way to travel.
-                pheromone[src][dst] += 1.0 / self.graph[src][dst]
-            
-            last = path[-1]
-            first = path[0]
-
-            pheromone[last][first] += 1.0 / self.graph[last][first]
-
 
 # FUNCTION: creates a Random Search State and produces the Graph related to it.
 def create_search_state(n_cities):
@@ -123,6 +106,24 @@ def eval_path(graph, path):
     return total_cost
 
 
+# FUNCTION: it spreads the pheromone. 
+def spread_pheromone(pheromone, graph, all_paths):
+    n_cities = len(all_paths[0])
+    for path in all_paths:
+        for i in range(0, n_cities-1):
+            src = path[i]
+            dst = path[i+1]
+
+            # If the Ant chose a good arc (short), the spreaded pheromone will be higher.
+            # In this way it suggests to the "future Ants" a good way to travel.
+            pheromone[src][dst] += 1.0 / graph[src][dst]
+            
+        last = path[-1]
+        first = path[0]
+
+        pheromone[last][first] += 1.0 / graph[last][first]
+
+
 def ant_colony_optimization(graph, n_ants, n_iterations, decay, alpha, beta):
     print("*** **************************************************** ***")
     print("*** Ant Colony Optimization x Traveling Salesman Problem ***")
@@ -146,8 +147,7 @@ def ant_colony_optimization(graph, n_ants, n_iterations, decay, alpha, beta):
             found_path = ant.gen_path(pheromone)
             all_paths.append(found_path)
 
-        for ant in ants:
-            ant.spread_pheromone(pheromone, all_paths)
+        spread_pheromone(pheromone, graph, all_paths)
         pheromone = pheromone * decay
 
         for ant in ants:
