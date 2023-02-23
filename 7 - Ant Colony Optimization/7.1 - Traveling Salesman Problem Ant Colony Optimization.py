@@ -31,6 +31,7 @@ class Ant:
             # The New City is picked depending on the pheromone set in the previous iterations (by other Ants).
             next = self.pick_next(pheromone[prev], self.graph[prev], self.path)
             self.path.append(next)
+            prev = next
         
         self.path_cost = eval_path(self.graph, self.path)
 
